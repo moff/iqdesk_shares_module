@@ -46,13 +46,14 @@
                         <thead>
                         <tr>
                             <?php
-                            $columns = 6;
+                            $columns = 7;
                             ?>
                             <th sort-column="shares.share_name" <?= @$_GET['sort-column'] == "" ? "sort-direction=\"asc\"" : "" ?>><?= $this->lang->line("share_name") ?></th>
                             <th sort-column="shares.buying_price"><?= $this->lang->line("buying_price") ?></th>
                             <th sort-column="shares.selling_price"><?= $this->lang->line("selling_price") ?></th>
                             <th sort-column="shares.quantity"><?= $this->lang->line("quantity") ?></th>
                             <th sort-column="shares.commision"><?= $this->lang->line("commision") ?></th>
+                            <th><?= $this->lang->line("pl") ?></th>
                             <th sort-column="shares.status"><?= $this->lang->line("status") ?></th>
                             <?php
                             $this->event->register("SharesTableHeading", $columns);
@@ -70,6 +71,7 @@
                         <tbody>
                         <?php
                         for ($i = 0; $i < count($items); $i++) {
+                            $pl = ($items[$i]->buying_price - $items[$i]->selling_price) * $items[$i]->quantity - $items[$i]->commision;
                             ?>
                             <tr>
                                 <td class="align-center"><?= $items[$i]->share_name ?></td>
@@ -77,7 +79,14 @@
                                 <td class="align-center"><?= $items[$i]->selling_price ?></td>
                                 <td class="align-center"><?= $items[$i]->quantity ?></td>
                                 <td class="align-center"><?= $items[$i]->commision ?></td>
-                                <td class="align-center"><?= $items[$i]->status ?></td>
+                                <td class="align-center"><?= $pl; ?></td>
+                                <td class="align-center">
+                                    <?php if ($items[$i]->status == 1) {
+                                        echo $this->lang->line('open_share_status');
+                                    } else {
+                                        echo $this->lang->line('closed_share_status');
+                                    } ?>
+                                </td>
                                 <?php
                                 $this->event->register("SharesTableRow", $items[$i], $i);
                                 ?>
