@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+    <title>Shares</title>
+    <name>shares</name>
+    <description>Shares module</description>
+    <version>0.9</version>
+    <author>Pavel Yakimov</author>
+    <primaryNavigationItem>
+        <section>shares</section>
+        <action>index</action>
+    </primaryNavigationItem>
+    <sections>
+        <section>
+            <title>Shares section</title>
+            <name>shares</name>
+            <description>Shares section</description>
+            <actions>
+                <action>
+                    <title>Shares</title>
+                    <name>index</name>
+                </action>
+                <action>
+                    <title>Create share</title>
+                    <name>create</name>
+                </action>
+                <action>
+                    <title>Update share</title>
+                    <name>update</name>
+                </action>
+                <action>
+                    <title>Delete share</title>
+                    <name>delete</name>
+                </action>
+            </actions>
+        </section>
+    </sections>
+</module>
