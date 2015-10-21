@@ -45,13 +45,13 @@ class Shares extends MX_Controller
                 array(
                     "type" => "text",
                     "name" => "share_name",
-                    "placeholder" => $this->lang->line("search_company_name")
+                    "placeholder" => $this->lang->line("search_share_name")
                 ),
             )
         );
         $this->sidebar->register($sidebar_params);
         $this->load->view('general/header', $this->view_data);
-        $this->load->view('listing/index', $this->view_data);
+        $this->load->view('shares/shares/index', $this->view_data);
         $this->load->view('general/footer', $this->view_data);
 
     }
