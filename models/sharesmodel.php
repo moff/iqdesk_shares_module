@@ -70,4 +70,30 @@ class SharesModel extends CI_Model
         return $return;
     }
 
+    function getItem($item_id)
+    {
+        $return = false;
+        $this->db->select("shares.*");
+        $this->db->from("shares");
+        $this->db->where("shares.id", $item_id);
+        $this->event->register("BuildShareQuery", $item_id);
+        $query = $this->db->get();
+        $result = $query->result();
+        if (count($result) > 0) {
+            $return = $result[0];
+        }
+        return $return;
+    }
+
+    function delete($item_id)
+    {
+        $this->event->register("BeforeDeleteShare", $item_id);
+        $client = $this->getItem($item_id);
+        $this->db->where("id", $item_id);
+        $this->db->delete("shares");
+        $this->event->register("AfterDeleteShare", $item_id);
+        $this->SystemLog->write("shares", "shares", "delete", 3, "Share \"" . $client->full_name . "\" has been deleted from the system");
+        return true;
+    }
+
 }

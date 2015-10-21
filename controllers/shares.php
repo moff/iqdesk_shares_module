@@ -72,4 +72,17 @@ class Shares extends MX_Controller
         $this->load->view('shares/shares/create', $this->view_data);
     }
 
+    public function delete()
+    {
+        if ($this->uri->segment(4) !== FALSE) {
+            $this->load->model('SharesModel');
+            if ($this->SharesModel->delete($this->uri->segment(4))) {
+                $this->notifications->setMessage($this->lang->line("share_deleted_successfully"));
+            }
+        } else {
+            $this->notifications->setError($this->lang->line("wrong_parameters"));
+        }
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
 }

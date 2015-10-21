@@ -49,7 +49,8 @@
                 <label for="commision"><?= $this->lang->line("commision") ?></label>
             </div>
             <div class="column-6">
-                <input type="text" id="commision" name="commision" class="full-width"/>
+                <input type="text" id="commision" name="commision" class="full-width" required-field="true"
+                       validation="[not-empty]"/>
             </div>
             <div class="clearfix"></div>
         </div>
