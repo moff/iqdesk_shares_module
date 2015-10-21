@@ -18,3 +18,4 @@ $lang['update_share'] = "Update share";
 $lang['open_share_status'] = "Open";
 $lang['closed_share_status'] = "Closed";
 $lang['share_deleted_successfully'] = "Share has been deleted successfully";
+$lang['share_updated_successfully'] = "Share has been updated successfully";

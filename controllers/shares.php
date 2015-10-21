@@ -72,6 +72,27 @@ class Shares extends MX_Controller
         $this->load->view('shares/shares/create', $this->view_data);
     }
 
+    public function update()
+    {
+        $this->load->model('SharesModel');
+        if ($this->uri->segment(4) !== FALSE) {
+            if ($data = $this->input->post(NULL, TRUE)) {
+                if ($this->SharesModel->update($data, $this->uri->segment(4))) {
+                    $this->notifications->setMessage($this->lang->line("share_updated_successfully"));
+                }
+                redirect($_SERVER['HTTP_REFERER']);
+            }
+            $this->view_data['item'] = $this->SharesModel->getItem($this->uri->segment(4));
+            if ($this->view_data['item'] === false) {
+                $this->load->view('errors/notfound', $this->view_data);
+            } else {
+                $this->load->view('shares/shares/update', $this->view_data);
+            }
+        } else {
+            $this->load->view('errors/wrongparameters', $this->view_data);
+        }
+    }
+
     public function delete()
     {
         if ($this->uri->segment(4) !== FALSE) {

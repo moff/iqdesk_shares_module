@@ -85,14 +85,46 @@ class SharesModel extends CI_Model
         return $return;
     }
 
+    function update($data, $item_id)
+    {
+        $this->event->register("BeforeUpdateShare", $data, $item_id);
+        $share = $this->getItem($item_id);
+        $return = true;
+        $this->db->select("id");
+        $this->db->from("shares");
+        $this->db->where("share_name", $data['share_name']);
+        $this->db->where("id !=", $item_id);
+        $query = $this->db->get();
+        $result = $query->result();
+        if (count($result) > 0) {
+            $return = false;
+            $this->notifications->setError("\"" . $data['share_name'] . "\" " . $this->lang->line("share_name_already_used"));
+        }
+        if ($return) {
+            $update = array(
+                "share_name" => $data['share_name'],
+                "buying_price" => $data['buying_price'],
+                "selling_price" => $data['selling_price'],
+                "quantity" => $data['quantity'],
+                "commision" => $data['commision'],
+                "status" => $data['status'],
+            );
+            $this->db->where("id", $item_id);
+            $this->db->update("shares", $update);
+            $this->event->register("AfterUpdateShare", $data, $item_id);
+            $this->SystemLog->write("shares", "shares", "update", 2, "Share \"" . $share->share_name . "\" has been updated in the system");
+        }
+        return $return;
+    }
+
     function delete($item_id)
     {
         $this->event->register("BeforeDeleteShare", $item_id);
-        $client = $this->getItem($item_id);
+        $share = $this->getItem($item_id);
         $this->db->where("id", $item_id);
         $this->db->delete("shares");
         $this->event->register("AfterDeleteShare", $item_id);
-        $this->SystemLog->write("shares", "shares", "delete", 3, "Share \"" . $client->full_name . "\" has been deleted from the system");
+        $this->SystemLog->write("shares", "shares", "delete", 3, "Share \"" . $share->share_name . "\" has been deleted from the system");
         return true;
     }
 
