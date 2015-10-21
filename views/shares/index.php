@@ -71,7 +71,7 @@
                         <tbody>
                         <?php
                         for ($i = 0; $i < count($items); $i++) {
-                            $pl = ($items[$i]->buying_price - $items[$i]->selling_price) * $items[$i]->quantity - $items[$i]->commision;
+                            $pl = (($items[$i]->selling_price - $items[$i]->buying_price) * $items[$i]->quantity) - $items[$i]->commision;
                             ?>
                             <tr>
                                 <td class="align-center"><?= $items[$i]->share_name ?></td>

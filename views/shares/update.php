@@ -61,9 +61,9 @@
             </div>
             <div class="column-6">
                 <select name="status">
-                    <option <?php if ($item->commision == 1) echo 'selected'; ?>
+                    <option <?php if ($item->status == 1) echo 'selected'; ?>
                         value="1"><?= $this->lang->line('open_share_status'); ?></option>
-                    <option <?php if ($item->commision == 0) echo 'selected'; ?>
+                    <option <?php if ($item->status == 0) echo 'selected'; ?>
                         value="0"><?= $this->lang->line('closed_share_status'); ?></option>
                 </select>
             </div>

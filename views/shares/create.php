@@ -20,7 +20,7 @@
             </div>
             <div class="column-6">
                 <input type="text" id="buying_price" name="buying_price" class="full-width" required-field="true"
-                       validation="[not-empty]"/>
+                       validation="[not-empty][positive-number]"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -30,7 +30,7 @@
             </div>
             <div class="column-6">
                 <input type="text" id="selling_price" name="selling_price" class="full-width" required-field="true"
-                       validation="[not-empty]"/>
+                       validation="[not-empty][positive-number]"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -40,7 +40,7 @@
             </div>
             <div class="column-6">
                 <input type="text" id="quantity" name="quantity" class="full-width" required-field="true"
-                       validation="[not-empty]"/>
+                       validation="[not-empty][positive-number]"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -50,7 +50,7 @@
             </div>
             <div class="column-6">
                 <input type="text" id="commision" name="commision" class="full-width" required-field="true"
-                       validation="[not-empty]"/>
+                       validation="[not-empty][positive-number]"/>
             </div>
             <div class="clearfix"></div>
         </div>
