@@ -10,6 +10,10 @@ class Shares extends MX_Controller
         $params = array();
         $get = $this->input->get(NULL, TRUE, TRUE);
 
+        if (isset($get['apply_filters']) && isset($get['filter'])) {
+            $params = $get['filter'];
+        }
+
         $sorting = array();
         if (isset($get['sort-column']) && @$get['sort-column'] != "") {
             $sorting['sort-column'] = $get['sort-column'];
