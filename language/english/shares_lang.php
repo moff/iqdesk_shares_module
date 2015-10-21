@@ -11,5 +11,9 @@ $lang['edit_share'] = "Edit Share";
 $lang['you_really_want_to_delete_share'] = "Do you really want to delete this share?";
 $lang['delete_share'] = "Delete Share";
 $lang['search_share_name'] = "Search share name";
-
-
+$lang['share_created_successfully'] = "Share has been created successfully";
+$lang['share_name_already_used'] = "share name already used in the system";
+$lang['create_share'] = "Create share";
+$lang['update_share'] = "Update share";
+$lang['open_share_status'] = "Open";
+$lang['closed_share_status'] = "Closed";

@@ -40,4 +40,34 @@ class SharesModel extends CI_Model
         return $return;
     }
 
+    function create($data)
+    {
+        $this->event->register("BeforeCreateShare", $data);
+        $return = true;
+        $this->db->select("id");
+        $this->db->from("shares");
+        $this->db->where("share_name", $data['share_name']);
+        $query = $this->db->get();
+        $result = $query->result();
+        if (count($result) > 0) {
+            $return = false;
+            $this->notifications->setError("\"" . $data['share_name'] . "\" " . $this->lang->line("share_name_already_used"));
+        }
+        if ($return) {
+            $insert = array(
+                "share_name" => $data['share_name'],
+                "buying_price" => $data['buying_price'],
+                "selling_price" => $data['selling_price'],
+                "quantity" => $data['quantity'],
+                "commision" => $data['commision'],
+                "status" => $data['status']
+            );
+            $this->db->insert("shares", $insert);
+            $item_id = $this->db->insert_id();
+            $this->event->register("AfterCreateShare", $data, $item_id);
+            $this->SystemLog->write("shares", "shares", "create", 1, "Share \"" . $data['share_name'] . "\" has been created in the system");
+        }
+        return $return;
+    }
+
 }

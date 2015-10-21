@@ -56,4 +56,16 @@ class Shares extends MX_Controller
 
     }
 
+    public function create()
+    {
+        $this->load->model('SharesModel');
+        if ($data = $this->input->post(NULL, TRUE)) {
+            if ($this->SharesModel->create($data)) {
+                $this->notifications->setMessage($this->lang->line("share_created_successfully"));
+            }
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        $this->load->view('shares/shares/create', $this->view_data);
+    }
+
 }
